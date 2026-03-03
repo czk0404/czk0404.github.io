@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    background-color: #87CEEB;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.left-controls,
+.right-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.center-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.gear-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.direction-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.throttle-btn {
+    background-color: #2196F3;
+    color: white;
+}
+
+.brake-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.gear-btn {
+    background-color: #ff9800;
+    color: white;
+    width: 100px;
+}
+
+.gear-btn.active {
+    background-color: #e65100;
+    box-shadow: 0 0 10px rgba(230, 81, 0, 0.5);
+}
+
+.restart-btn {
+    background-color: #9c27b0;
+    color: white;
+    width: 120px;
+}
+
+@media (max-width: 768px) {
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 14px;
+    }
+    
+    .gear-btn {
+        width: 80px;
+    }
+    
+    .restart-btn {
+        width: 100px;
+    }
+    
+    .controls {
+        margin-top: 15px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 12px;
+    }
+    
+    .gear-btn {
+        width: 70px;
+    }
+    
+    .restart-btn {
+        width: 90px;
+    }
+    
+    .controls {
+        margin-top: 10px;
+    }
+}
