@@ -16,7 +16,7 @@ window.addEventListener('resize', resizeCanvas);
 const gameState = {
     car: {
         x: 50,           // 初始位置：水平靠左
-        y: canvas.height / 2,  // 初始位置：上下居中
+        y: 350,  // 初始位置：上下居中
         width: 80,       // 汽车宽度
         height: 40,      // 汽车高度
         angle: 0,        // 汽车角度（弧度）
@@ -40,7 +40,7 @@ const gameState = {
         parkingHeight:100, // 中部停车位高度
         parkingWidth: 56,   // 每个停车位宽度
         parkingX: canvas.width / 2,
-        parkingY: 528       // 停车位Y坐标
+        parkingY: 420       // 停车位Y坐标
     }
 };
 
@@ -176,7 +176,7 @@ function gameLoop() {
 // 重置游戏
 function resetGame() {
     gameState.car.x = 50;
-    gameState.car.y = canvas.height / 2;
+    gameState.car.y = 350;
     gameState.car.angle = 0;
     gameState.car.speed = 0;
     gameState.car.steeringAngle = 0;
@@ -319,4 +319,5 @@ function initGame() {
 }
 
 // 启动游戏
+
 initGame();
