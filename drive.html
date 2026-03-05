@@ -20,6 +20,12 @@
             min-height: 100vh;
         }
         h1 {
+             margin-bottom: 10px;
+            color: #333;
+        }
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
             margin-bottom: 20px;
             color: #333;
         }
@@ -105,6 +111,7 @@
 </head>
 <body>
     <h1>汽车倒车入库游戏</h1>
+    <div class="timer">时间: <span id="timer">00:00</span></div>
     <div class="game-container">
         <canvas id="gameCanvas"></canvas>
     </div>
@@ -122,3 +129,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
