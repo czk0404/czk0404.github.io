@@ -16,7 +16,7 @@ window.addEventListener('resize', resizeCanvas);
 const gameState = {
     car: {
         x: 50,           // 初始位置：水平靠左
-        y: canvas.height / 2-75,  // 初始位置：上下居中
+        y: canvas.height *0.5-50,  // 初始位置：上下居中
         width: 80,       // 汽车宽度
         height: 40,      // 汽车高度
         angle: 0,        // 汽车角度（弧度）
@@ -36,17 +36,23 @@ const gameState = {
         brake: false
     },
     garage: {
-        roadHeight: canvas.height / 2,  // 上部道路高度
-        parkingHeight:150, // 中部停车位高度
-        parkingWidth: 60,   // 每个停车位宽度
-        parkingX: canvas.width / 2-28,
-        parkingY: canvas.height / 2      // 停车位Y坐标
+        roadHeight: 150,  // 上部道路高度
+        roadWidth: canvas.width, // 中部停车位高度
+        parkingWidth: 60,
+        parkingHeight: 100,// 每个停车位宽度
+        parkingX: canvas.width *0.4,
+        parkingY: canvas.height *0.5      // 停车位Y坐标
+    },
+    timer: {
+        seconds: 0,
+        minutes: 0,
+        interval: null
     }
 };
 
 // 绘制车库和停车位
 function drawGarage() {
-    const { roadHeight, parkingHeight, parkingWidth, parkingX,parkingY } = gameState.garage;
+    const { roadWidth,roadHeight,parkingX,parkingY,parkingHeight,parkingWidth } = gameState.garage;
     
     // 绘制上部道路
     ctx.fillStyle = '#808080';
@@ -54,14 +60,12 @@ function drawGarage() {
     
     // 绘制中部停车位区域
     ctx.fillStyle = '#a0a0a0';
-    ctx.fillRect(0, roadHeight-150, canvas.width, parkingHeight);
+    ctx.fillRect(0, parkingY-roadHeight, roadWidth, roadHeight);
     
     // 绘制三个停车位
     ctx.strokeStyle = '#333';
     ctx.lineWidth = 2;
-    for (let i = 0; i < 3; i++) {
-        const x = i * parkingWidth;
-        ctx.strokeRect(parkingX, parkingY, 60, 100);
+    ctx.strokeRect(parkingX, parkingY, parkingWidth, parkingHeight);
     }
     
 }
@@ -170,16 +174,49 @@ function gameLoop() {
     renderGame();
     requestAnimationFrame(gameLoop);
 }
+// 更新计时器显示
+function updateTimerDisplay() {
+    const { minutes, seconds } = gameState.timer;
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+    document.getElementById('timer').textContent = `${formattedMinutes}:${formattedSeconds}`;
+}
+
+// 开始计时
+function startTimer() {
+    if (gameState.timer.interval) return;
+    
+    gameState.timer.interval = setInterval(() => {
+        gameState.timer.seconds++;
+        if (gameState.timer.seconds >= 60) {
+            gameState.timer.seconds = 0;
+            gameState.timer.minutes++;
+        }
+        updateTimerDisplay();
+    }, 1000);
+}
+
+// 重置计时器
+function resetTimer() {
+    clearInterval(gameState.timer.interval);
+    gameState.timer.seconds = 0;
+    gameState.timer.minutes = 0;
+    gameState.timer.interval = null;
+    updateTimerDisplay();
+}
 
 // 重置游戏
 function resetGame() {
     gameState.car.x = 50;
-    gameState.car.y = canvas.height / 2-75;
+    gameState.car.y = canvas.height *0.5-50;
     gameState.car.angle = 0;
     gameState.car.speed = 0;
     gameState.car.steeringAngle = 0;
     gameState.car.gear = 'forward';
-    
+     
+    // 重置计时器
+    resetTimer();
+    startTimer();
     // 更新档位按钮状态
     document.getElementById('forwardBtn').classList.add('active');
     document.getElementById('reverseBtn').classList.remove('active');
@@ -313,9 +350,11 @@ function setupEventListeners() {
 // 初始化游戏
 function initGame() {
     setupEventListeners();
+    startTimer();
     gameLoop();
 }
 
 // 启动游戏
 initGame();
+
 
