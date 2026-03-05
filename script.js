@@ -16,7 +16,7 @@ window.addEventListener('resize', resizeCanvas);
 const gameState = {
     car: {
         x: 50,           // 初始位置：水平靠左
-        y: 320,  // 初始位置：上下居中
+        y: canvas.height / 2-75,  // 初始位置：上下居中
         width: 80,       // 汽车宽度
         height: 40,      // 汽车高度
         angle: 0,        // 汽车角度（弧度）
@@ -174,7 +174,7 @@ function gameLoop() {
 // 重置游戏
 function resetGame() {
     gameState.car.x = 50;
-    gameState.car.y = 320;
+    gameState.car.y = canvas.height / 2-75;
     gameState.car.angle = 0;
     gameState.car.speed = 0;
     gameState.car.steeringAngle = 0;
@@ -318,3 +318,4 @@ function initGame() {
 
 // 启动游戏
 initGame();
+
