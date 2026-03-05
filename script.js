@@ -66,8 +66,6 @@ function drawGarage() {
     ctx.strokeStyle = '#333';
     ctx.lineWidth = 2;
     ctx.strokeRect(parkingX, parkingY, parkingWidth, parkingHeight);
-    }
-    
 }
 
 // 绘制汽车
@@ -349,6 +347,19 @@ function setupEventListeners() {
 
 // 初始化游戏
 function initGame() {
+    // 检查必要的DOM元素是否存在
+    const requiredElements = [
+        'gameCanvas', 'timer', 'restartBtn', 'forwardBtn', 'reverseBtn',
+        'leftBtn', 'rightBtn', 'throttleBtn', 'brakeBtn'
+    ];
+    
+    for (const id of requiredElements) {
+        if (!document.getElementById(id)) {
+            console.error(`缺少必要的DOM元素: ${id}`);
+            return;
+        }
+    }
+    
     setupEventListeners();
     startTimer();
     gameLoop();
