@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汽车倒车入库游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+             margin-bottom: 10px;
+            color: #333;
+        }
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .game-container {
+            position: relative;
+            width: 90vw;
+            max-width: 600px;
+            height: 60vh;
+            background-color: #fff;
+            border: 2px solid #333;
+        }
+        #gameCanvas {
+            width: 100%;
+            height: 100%;
+            background-color: #e0e0e0;
+        }
+        .controls {
+            margin-top: 20px;
+            width: 90vw;
+            max-width: 600px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .control-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .control-btn:active {
+            background-color: #45a049;
+        }
+        .control-btn.active {
+            background-color: #2E7D32;
+        }
+        .restart-btn {
+            grid-column: 1 / 3;
+            background-color: #f44336;
+        }
+        .restart-btn:active {
+            background-color: #da190b;
+        }
+        .gear-btn {
+            grid-column: 3 / 5;
+            display: flex;
+        }
+        .gear-btn button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .gear-btn .forward {
+            border-radius: 5px 0 0 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .gear-btn .reverse {
+            border-radius: 0 5px 5px 0;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .gear-btn button:active {
+            opacity: 0.8;
+        }
+        .gear-btn button.active {
+            background-color: #f44336;
+        }
+        .gear-btn .reverse.active {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>汽车倒车入库游戏</h1>
+    <div class="timer">时间: <span id="timer">00:00</span></div>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <div class="controls">
+        <button class="control-btn restart-btn" id="restartBtn">重新开始</button>
+        <div class="gear-btn">
+            <button class="forward active" id="forwardBtn">前进挡</button>
+            <button class="reverse" id="reverseBtn">倒车档</button>
+        </div>
+        <button class="control-btn" id="leftBtn">←</button>
+        <button class="control-btn" id="rightBtn">→</button>
+        <button class="control-btn" id="throttleBtn">油门</button>
+        <button class="control-btn" id="brakeBtn">刹车</button>
+    </div>
+    <script src="script1.js"></script>
+</body>
+</html>
+
