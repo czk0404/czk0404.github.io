@@ -218,7 +218,7 @@ function showParkingSuccess() {
     // 创建成功消息元素
     const successMessage = document.createElement('div');
     successMessage.style.position = 'fixed';
-    successMessage.style.top = '70%';
+    successMessage.style.top = '20%';
     successMessage.style.left = '50%';
     successMessage.style.transform = 'translate(-50%, -50%)';
     successMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
@@ -461,5 +461,6 @@ function initGame() {
 
 // 启动游戏
 initGame();
+
 
 
