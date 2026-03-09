@@ -383,11 +383,7 @@ function setupEventListeners() {
         gameState.keys.brake = false;
     });
     
-    // 触摸移动事件（防止页面滚动）
-    document.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-    }, { passive: false });
-    
+          
     // 防止双击缩放
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function(e) {
@@ -401,6 +397,30 @@ function setupEventListeners() {
     // 防止触摸时的文本选择
     document.addEventListener('selectstart', function(e) {
         e.preventDefault();
+    });
+    
+    // 防止长按触发的默认行为
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+    
+    // 防止长按触发的其他默认行为（如iOS上的长按菜单）
+    document.addEventListener('touchstart', function(e) {
+        // 对于控制按钮，防止长按默认行为
+        const target = e.target;
+        if (target.classList.contains('control-btn') || 
+            target.closest('.gear-btn')) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    // 防止长按触发的选择行为
+    document.addEventListener('mousedown', function(e) {
+        const target = e.target;
+        if (target.classList.contains('control-btn') || 
+            target.closest('.gear-btn')) {
+            e.preventDefault();
+        }
     });
     
     // 鼠标事件（用于桌面测试）
