@@ -341,21 +341,25 @@ function setupEventListeners() {
     leftBtn.addEventListener('touchstart', function(e) {
         e.preventDefault();
         gameState.keys.left = true;
+        provideTouchFeedback(this);
     });
     
     rightBtn.addEventListener('touchstart', function(e) {
         e.preventDefault();
         gameState.keys.right = true;
+        provideTouchFeedback(this);
     });
     
     throttleBtn.addEventListener('touchstart', function(e) {
         e.preventDefault();
         gameState.keys.throttle = true;
+        provideTouchFeedback(this);
     });
     
     brakeBtn.addEventListener('touchstart', function(e) {
         e.preventDefault();
         gameState.keys.brake = true;
+        provideTouchFeedback(this);
     });
     
     // 触摸结束
@@ -377,6 +381,26 @@ function setupEventListeners() {
     brakeBtn.addEventListener('touchend', function(e) {
         e.preventDefault();
         gameState.keys.brake = false;
+    });
+    
+    // 触摸移动事件（防止页面滚动）
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    }, { passive: false });
+    
+    // 防止双击缩放
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(e) {
+        const now = Date.now();
+        if (now - lastTouchEnd < 300) {
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, { passive: false });
+    
+    // 防止触摸时的文本选择
+    document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
     });
     
     // 鼠标事件（用于桌面测试）
@@ -461,6 +485,5 @@ function initGame() {
 
 // 启动游戏
 initGame();
-
 
 
