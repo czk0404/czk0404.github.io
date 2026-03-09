@@ -339,47 +339,47 @@ function setupEventListeners() {
     
     // 触摸开始
     leftBtn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.left = true;
         provideTouchFeedback(this);
     });
     
     rightBtn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.right = true;
         provideTouchFeedback(this);
     });
     
     throttleBtn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.throttle = true;
         provideTouchFeedback(this);
     });
     
     brakeBtn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.brake = true;
         provideTouchFeedback(this);
     });
     
     // 触摸结束
     leftBtn.addEventListener('touchend', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.left = false;
     });
     
     rightBtn.addEventListener('touchend', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.right = false;
     });
     
     throttleBtn.addEventListener('touchend', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.throttle = false;
     });
     
     brakeBtn.addEventListener('touchend', function(e) {
-        e.preventDefault();
+        // 移除preventDefault()以确保按钮响应
         gameState.keys.brake = false;
     });
     
@@ -405,14 +405,8 @@ function setupEventListeners() {
     });
     
     // 防止长按触发的其他默认行为（如iOS上的长按菜单）
-    document.addEventListener('touchstart', function(e) {
-        // 对于控制按钮，防止长按默认行为
-        const target = e.target;
-        if (target.classList.contains('control-btn') || 
-            target.closest('.gear-btn')) {
-            e.preventDefault();
-        }
-    }, { passive: false });
+    // 移除全局touchstart事件监听器，避免与按钮触摸事件冲突
+    // 改为使用CSS来防止长按菜单
     
     // 防止长按触发的选择行为
     document.addEventListener('mousedown', function(e) {
